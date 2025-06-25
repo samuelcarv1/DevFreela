@@ -1,5 +1,6 @@
 ﻿using DevFreela.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace DevFreela.API.Controllers
 {
@@ -7,10 +8,22 @@ namespace DevFreela.API.Controllers
     public class ProjectsController : Controller
     {
 
+        private readonly OpeningTimeOption _option;
+
+        public ProjectsController(IOptions<OpeningTimeOption> options)
+        {
+            _option = options.Value;
+        }
+
         [HttpGet]
         public IActionResult Get(string query)
         {
             //Buscar todos os filtrados
+            if (DateTime.Now.TimeOfDay >= _option.FinishAt)
+            {
+                return NotFound("Operação não permitida fora do horário de funcionamento");
+            }
+
             return Ok();
         }
 
