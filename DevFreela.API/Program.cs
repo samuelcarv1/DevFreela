@@ -14,6 +14,10 @@ var connectionString = builder.Configuration.GetConnectionString("DevFreelaCs");
 
 builder.Services.AddDbContext<DevFreelaDbContext>(options => options.UseSqlServer(connectionString));
 
+//injeção de dependencia para utilizar o EF Core InMemory
+//builder.Services.AddDbContext<DevFreelaDbContext>(o => o.UseInMemoryDatabase(databaseName: "InMemoryDatabase"));
+
+
 builder.Services.AddScoped<IProjectService, ProjectService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ISkillService, SkillService>();
