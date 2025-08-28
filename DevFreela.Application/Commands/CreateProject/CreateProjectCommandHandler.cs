@@ -3,15 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DevFreela.Core.Entities;
+using DevFreela.Infrastructure.Persistence;
 using MediatR;
 
 namespace DevFreela.Application.Commands.CreateProject
 {
     public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, int>
     {
-        public Task<int> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
+
+        private readonly DevFreelaDbContext _dbContext;
+        public CreateProjectCommandHandler(DevFreelaDbContext dbContext) 
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+
+        public async Task<int> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
+        {
+            var project = new Project(request.Title, request.Description, request.IdClient, request.IdFreelancer, request.TotalCost);
+
+            await _dbContext.Projects.AddAsync(project);
+            await _dbContext.SaveChangesAsync();
+
+            return project.Id;
         }
     }
 }
