@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
 using DevFreela.Application.ViewModels;
@@ -24,8 +25,9 @@ namespace DevFreela.Application.Queries.GetAllSkills
         public async Task<List<SkillDTO>> Handle(GetAllSkillsQuery request, CancellationToken cancellationToken)
         {
 
-            return await _skillRepository.GetAll();
+            return await _skillRepository.GetAllAsync();
             
         }
+
     }
 }

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using DevFreela.Core.Entities;
+﻿using DevFreela.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace DevFreela.Infrastructure.Persistence.Configurations
 {
@@ -14,11 +11,13 @@ namespace DevFreela.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(p => p.Id);
+            builder
+                .HasKey(s => s.Id);
 
-            builder.HasMany(u => u.Skills)
+            builder
+                .HasMany(u => u.Skills)
                 .WithOne()
-                .HasForeignKey(p => p.IdSkill)
+                .HasForeignKey(u => u.IdSkill)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

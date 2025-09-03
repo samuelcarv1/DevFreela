@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using System.Linq;
+using Dapper;
 using DevFreela.Application.InputModels;
 using DevFreela.Application.Services.Interfaces;
 using DevFreela.Application.ViewModels;

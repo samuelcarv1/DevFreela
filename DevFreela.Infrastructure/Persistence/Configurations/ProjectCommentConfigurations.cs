@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using DevFreela.Core.Entities;
+﻿using DevFreela.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace DevFreela.Infrastructure.Persistence.Configurations
 {
@@ -14,14 +11,17 @@ namespace DevFreela.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<ProjectComment> builder)
         {
-            builder.HasKey(p => p.Id);
+            builder
+                .HasKey(p => p.Id);
 
-            builder.HasOne(p => p.Project)
-                .WithMany(f => f.Comments)
+            builder
+                .HasOne(p => p.Project)
+                .WithMany(p => p.Comments)
                 .HasForeignKey(p => p.IdProject);
 
-            builder.HasOne(p => p.User)
-                .WithMany(f => f.Comments)
+            builder
+                .HasOne(p => p.User)
+                .WithMany(p => p.Comments)
                 .HasForeignKey(p => p.IdUser);
         }
     }
