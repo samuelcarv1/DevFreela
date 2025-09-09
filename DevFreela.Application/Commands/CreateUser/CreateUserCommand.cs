@@ -9,5 +9,7 @@ namespace DevFreela.Application.Commands.CreateUser
         public string Password { get; set; }
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
+
+        public string Role { get; private set; }
     }
 }
