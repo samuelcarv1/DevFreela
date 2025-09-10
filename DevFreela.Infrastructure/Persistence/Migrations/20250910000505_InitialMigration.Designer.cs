@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DevFreela.Infrastructure.Persistence.Migrations
+namespace DevFreela.Infrastructure.Migrations
 {
     [DbContext(typeof(DevFreelaDbContext))]
-    [Migration("20250908235030_AddLoginColumns")]
-    partial class AddLoginColumns
+    [Migration("20250910000505_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
